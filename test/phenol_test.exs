@@ -17,14 +17,9 @@ defmodule PhenolTest do
   </html>
   """
 
-  @tag :skip
   describe "Phenol.strip_tags/1" do
     test "removes all tags from html" do
-      assert Phenol.strip_tags(@html) == """
-      Title
-
-      A link!
-      """
+      assert to_string(Phenol.strip_tags!(@html)) |> String.replace(~r/\s{2,}/, "") == "TitleA link!"
     end
   end
 end

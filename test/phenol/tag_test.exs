@@ -45,38 +45,52 @@ defmodule Phenol.TagTest do
               ],
               [
                 "\n  ",
-                "ul",
-                [],
                 [
-                  "\n    ",
-                  "li",
+                  "ul",
                   [],
                   [
-                    "\n      ",
-                    "a",
-                    [["href", "\"http://www.google.com\""]],
-                    ["Link!"],
-                    "\n      ",
-                    "a",
-                    [["href", "\"http://www.google.com\""]],
-                    ["Link!"],
-                    "\n    "
-                  ],
-                  "\n    ",
-                  "li",
-                  [],
-                  [
-                    "\n      ",
-                    "a",
-                    [["href", "\"http://www.google.com\""]],
-                    ["Link!"],
-                    "\n      ",
-                    "a",
-                    [["href", "\"http://www.google.com\""]],
-                    ["Link!"],
-                    "\n    "
-                  ],
-                  "\n  "
+                    "\n    ",
+                    [
+                      "li",
+                      [],
+                      [
+                        "\n      ",
+                        [
+                          "a",
+                          [["href", "\"http://www.google.com\""]],
+                          ["Link!"]
+                        ],
+                        "\n      ",
+                        [
+                          "a",
+                          [["href", "\"http://www.google.com\""]],
+                          ["Link!"]
+                        ],
+                        "\n    "
+                      ]
+                    ],
+                    "\n    ",
+                    [
+                      "li",
+                      [],
+                      [
+                        "\n      ",
+                        [
+                          "a",
+                          [["href", "\"http://www.google.com\""]],
+                          ["Link!"]
+                        ],
+                        "\n      ",
+                        [
+                          "a",
+                          [["href", "\"http://www.google.com\""]],
+                          ["Link!"]
+                        ],
+                        "\n    "
+                      ]
+                    ],
+                    "\n  "
+                  ]
                 ],
                 "\n"
               ]

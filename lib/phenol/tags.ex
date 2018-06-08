@@ -54,7 +54,7 @@ defmodule Phenol.Tags do
     ascii_string([{:not, ?<}, {:not, ?>}], min: 1)
 
   inner_tag_content =
-    choice([not_tag_element, parsec(:content_tag), not_tag_element])
+    choice([not_tag_element, wrap(parsec(:content_tag)), not_tag_element])
 
   defparsec(
     :content_tag,
