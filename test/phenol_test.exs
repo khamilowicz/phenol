@@ -21,5 +21,9 @@ defmodule PhenolTest do
     test "removes all tags from html" do
       assert to_string(Phenol.strip_tags!(@html)) |> String.replace(~r/\s{2,}/, "") == "TitleA link!"
     end
+
+    test "keeps all tags from html" do
+      assert to_string(Phenol.dryrun!(@html)) == String.trim_trailing(@html)
+    end
   end
 end
