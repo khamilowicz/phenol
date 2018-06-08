@@ -17,13 +17,17 @@ defmodule PhenolTest do
   </html>
   """
 
-  describe "Phenol.strip_tags/1" do
-    test "removes all tags from html" do
-      assert to_string(Phenol.strip_tags!(@html)) |> String.replace(~r/\s{2,}/, "") == "TitleA link!"
-    end
+  defmodule NoStyleOrBody do
+    use Phenol,
+      blacklist: [
+        tags: ["body"],
+        attributes: ["style"]
+      ]
+  end
 
-    test "keeps all tags from html" do
-      assert to_string(Phenol.dryrun!(@html)) == String.trim_trailing(@html)
+  describe "Phenol.strip_tags/1" do
+    test "keeps tags and attributes we specify" do
+      assert to_string(NoStyleOrBody.html!(@html)) |> String.replace(~r/\s\s/, "") == ~s{<html> <head> <title>Title</title> </head><ul> <li> <a href="http://example.com">A link!</a> </li> </ul></html>}
     end
   end
 end
