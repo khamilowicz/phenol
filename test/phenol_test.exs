@@ -30,4 +30,13 @@ defmodule PhenolTest do
       assert to_string(NoStyleOrBody.html!(@html)) |> String.replace(~r/\s\s/, "") == ~s{<html> <head> <title>Title</title> </head><ul> <li> <a href="http://example.com">A link!</a> </li> </ul></html>}
     end
   end
+
+  describe "Phenol.ScrubTags.html/1" do
+    test "removes all tags and attributes" do
+      File.read!("./benchmarks/sample.html")
+      |> Phenol.ScrubTags.html!
+      |> to_string 
+      |> IO.puts
+    end
+  end
 end

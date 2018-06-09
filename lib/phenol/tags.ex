@@ -1,8 +1,8 @@
 defmodule Phenol.Tags do
   import NimbleParsec
 
-  tag_name = ascii_string([?a..?z, ?A..?Z], min: 1)
-  quoted_content = ascii_string([?a..?z, ?A..?Z], min: 1)
+  tag_name = ascii_string([?a..?z, ?A..?Z, ?0..?9], min: 1)
+  quoted_content = ascii_string([?a..?z, ?A..?Z, ?0..?9], min: 1)
 
   single_quoted_string =
     string("'")
@@ -19,7 +19,7 @@ defmodule Phenol.Tags do
     |> reduce({Enum, :join, []})
 
   tag_attr =
-    ignore(string(" "))
+    optional(ignore(string(" ")))
     |> concat(tag_name)
     |> concat(ignore(string("=")))
     |> concat(quoted_string)
@@ -27,7 +27,9 @@ defmodule Phenol.Tags do
 
   tag_content =
     tag_name
+    |> optional(ignore(repeat(string(" "))))
     |> concat(wrap(repeat(tag_attr)))
+    |> optional(ignore(repeat(string(" "))))
 
   defparsec(
     :single_tag,
@@ -50,16 +52,21 @@ defmodule Phenol.Tags do
     |> ignore(string(">"))
   )
 
-  not_tag_element =
-    ascii_string([{:not, ?<}, {:not, ?>}], min: 1)
+  not_tag_element = ascii_string([{:not, ?<}, {:not, ?>}], min: 1)
 
   inner_tag_content =
-    choice([not_tag_element, wrap(parsec(:content_tag)), not_tag_element])
+    choice([
+      not_tag_element,
+      wrap(parsec(:single_tag)),
+      wrap(parsec(:content_tag)),
+      not_tag_element
+    ])
 
   defparsec(
     :content_tag,
     parsec(:opening_tag)
     |> concat(wrap(repeat(inner_tag_content)))
-    |> ignore(parsec(:closing_tag))
+    |> ignore(parsec(:closing_tag)),
+    inline: true
   )
 end

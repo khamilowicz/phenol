@@ -1,3 +1,7 @@
 %{
+  "benchee": {:hex, :benchee, "0.13.1", "bd93ca05be78bcb6159c7176230efeda2f724f7ffd485515175ca411dff4893e", [:mix], [{:deep_merge, "~> 0.1", [hex: :deep_merge, repo: "hexpm", optional: false]}], "hexpm"},
+  "deep_merge": {:hex, :deep_merge, "0.1.1", "c27866a7524a337b6a039eeb8dd4f17d458fd40fbbcb8c54661b71a22fffe846", [:mix], [], "hexpm"},
+  "html_sanitize_ex": {:hex, :html_sanitize_ex, "1.3.0", "f005ad692b717691203f940c686208aa3d8ffd9dd4bb3699240096a51fa9564e", [:mix], [{:mochiweb, "~> 2.15", [hex: :mochiweb, repo: "hexpm", optional: false]}], "hexpm"},
+  "mochiweb": {:hex, :mochiweb, "2.15.0", "e1daac474df07651e5d17cc1e642c4069c7850dc4508d3db7263a0651330aacc", [:rebar3], [], "hexpm"},
   "nimble_parsec": {:hex, :nimble_parsec, "0.3.2", "6d3373c04fdef6c880bc6cd0ea6cfe8f1e9b962a8baab7063ef193aede1b5d54", [:mix], [], "hexpm"},
 }

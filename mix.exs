@@ -21,7 +21,9 @@ defmodule Phenol.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:nimble_parsec, "~> 0.3.2"}
+      {:nimble_parsec, "~> 0.3.2"},
+      {:benchee, "~> 0.11", only: :dev},
+      {:html_sanitize_ex, "~> 1.3.0-rc3", only: :dev}
     ]
   end
 end

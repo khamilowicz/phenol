@@ -3,6 +3,7 @@ defmodule Phenol.TagTest do
 
   @nested_html """
   <div style="background-color:red;margin-top:10px" class="pretty not-really">
+    <link src="/example.com" />
     <ul>
       <li>
         <a href="http://www.google.com">Link!</a>
@@ -24,8 +25,17 @@ defmodule Phenol.TagTest do
     assert {:ok, ["div", [], ["content"]], _, _, _, _} =
              Phenol.Tags.content_tag("<div>content</div>")
 
+    assert {:ok, ["h1", [], ["content"]], _, _, _, _} =
+             Phenol.Tags.content_tag("<h1>content</h1>")
+
+    assert {:ok, ["div", [], [["h1", [], ["content"]]]], _, _, _, _} =
+             Phenol.Tags.content_tag("<div><h1>content</h1></div>")
+
     assert {:ok, ["div", [["style", "'lol'"]], ["content"]], _, _, _, _} =
              Phenol.Tags.content_tag("<div style='lol'>content</div>")
+
+    assert {:ok, ["div", [["style", "'lol'"]], [["b", []], " content"]], _, _, _, _} =
+             Phenol.Tags.content_tag("<div style='lol'><b /> content</div>")
 
     assert {:ok,
             [
@@ -44,6 +54,8 @@ defmodule Phenol.TagTest do
                 ["class", "\"pretty not-really\""]
               ],
               [
+                "\n  ",
+                ["link", [["src", "\"/example.com\""]]],
                 "\n  ",
                 [
                   "ul",
@@ -97,9 +109,8 @@ defmodule Phenol.TagTest do
             ], "\n", _, _, _} = Phenol.Tags.content_tag(@nested_html)
   end
 
-  @tag :skip
   test "actual file" do
     file = File.read!("./test/phenol/test_file.html")
-    Phenol.Tags.content_tag(file) |> IO.inspect()
+    assert {:ok, _, _, _, _} = Phenol.Tags.content_tag(file)
   end
 end
