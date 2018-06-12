@@ -37,6 +37,9 @@ defmodule Phenol.TagTest do
     assert {:ok, ["div", [["style", "'lol'"]], [["b", []], " content"]], _, _, _, _} =
              Phenol.Tags.content_tag("<div style='lol'><b /> content</div>")
 
+    assert {:ok, ["div", [["style", "'lol'"]], [["b", []], " &lt content "]], _, _, _, _} =
+             Phenol.Tags.content_tag("<div style='lol'><b /> <3 content </div>")
+
     assert {:ok,
             [
               "div",
